@@ -1,0 +1,21 @@
+<div *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<mat-list>
+  <mat-list-item *ngFor="let planet of planets | async">
+      {{ planet.name }}
+      <a [routerLink]="['/planets', planet.id]">
+        <mat-icon>chevron_right</mat-icon>
+      </a>
+  </mat-list-item>
+</mat-list>
+
+<mat-paginator [length]="totalPlanets | async"
+              [pageSize]="pageSize"
+              [pageIndex]="currentPage - 1"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              showFirstLastButtons="false"
+              (page)="onPage($event)"
+              >
+</mat-paginator>
